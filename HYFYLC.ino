@@ -1,4 +1,4 @@
-#include "MyTimer.h"
+mi me#include "MyTimer.h"
 
 // Pin defines
 #define btn1Pin 2 // button 1
@@ -141,7 +141,7 @@ void loop() {
       if ((!btnComboTmr.check()) && (combo)){
         combo = false;
         // Serial.println("...");
-        go(5);
+        go(4);
       }
       break;
     case 1:
@@ -192,7 +192,7 @@ void loop() {
           unclogCount += 1;
         }
       }
-      if (100-millis()%100 < 200){
+      if (100-millis()%100 < 20){
          Serial.println(analogRead(lightBarrierPin));
       }
       if ((lightReference-analogRead(lightBarrierPin)) > lightThreshold) {
@@ -247,21 +247,8 @@ void loop() {
         unclogCount = 0;
         go(1);
       }
-      //
-      //Serial.println("...");
-      //go(4);
       break;
     case 4:
-      if (first){
-        // run code only once
-        first = false;
-        //Serial.println(state);
-      }
-      //
-      //Serial.println("...");
-      //go(5);
-      break;
-    case 5:
       if (first){
         // run code only once
         first = false;
