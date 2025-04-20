@@ -32,7 +32,6 @@ mi me#include "MyTimer.h"
  * 2 - unclog: activate motor B CCW
  * 3 - launch: activate motor A CW for a certain amount of time
  * 4 -
- * 5 -
  * 
  */
 
@@ -192,8 +191,8 @@ void loop() {
           unclogCount += 1;
         }
       }
-      if (100-millis()%100 < 20){
-         Serial.println(analogRead(lightBarrierPin));
+      // if (100-millis()%100 < 20){
+    Serial.println(analogRead(lightBarrierPin));
       }
       if ((lightReference-analogRead(lightBarrierPin)) > lightThreshold) {
         MotorCmd(1, 0, 0); // Stops and wait to avoid arduino reset
