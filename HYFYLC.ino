@@ -18,9 +18,9 @@ mi me#include "MyTimer.h"
 // Time and thresholds defines
 #define loadTime 4000
 #define unclogTime 1500
-#define loadAttempts 5
-#define springChargeTime 1000
-#define lightBaseline 100
+#define loadAttempts 5  // Max loading attempts with no food transit detection
+#define springChargeTime 1000 
+#define lightBaseline 140
 #define lightThreshold 80
 #define baselineTolerance 20
 
@@ -54,10 +54,10 @@ byte unclogCount = 0;
 int lightReference = lightBaseline;
 int delta = 0, prevDelta = 0;
 
-
 int ledTime[] = {3000, 3000};
 int ledIndex = 0;
 
+void go(int s);
 void LedSet(int A = 0, int B = 0);
 void MotorCmd(bool n, bool A = 0, bool B = 0, int T = 0 );
 int LightTest();
@@ -177,8 +177,7 @@ void loop() {
         MotorCmd(1, 0, 0); // Stops and wait to avoid arduino reset
         delay(500);
         MotorCmd(1, 1, 0, unclogTime);
-        // Serial.println("...");
-        //go(2);
+
       }
       if (!motorBStatus && !mtrBTmr.check()) {
         if (loadCount == unclogCount){
@@ -222,7 +221,7 @@ void loop() {
         delay(500);
         go(1);
       }
-      //go(3);
+
       
       break;
     case 3:
@@ -236,7 +235,6 @@ void loop() {
       if ((!btn1Tmr.check()) && (prevBtn1 && !btn1) ){
         btn1Tmr.set(debounceTime);
         btn1Tmr.start();
-        // Serial.println("...");
         go(0);
       }
       if (!motorAStatus && !mtrATmr.check()) {
@@ -262,8 +260,8 @@ void loop() {
         btn2Tmr.set(debounceTime);
         btn2Tmr.start();
         // Serial.println("...");
-        btn1Tmr.set(debounceTime); //???
-        btn1Tmr.start(); //???
+        btn1Tmr.set(debounceTime); // ???
+        btn1Tmr.start(); // ???
         lightReference = analogRead(lightBarrierPin);
         Serial.print("lightReference: ");
         Serial.println(lightReference);
@@ -281,10 +279,7 @@ void loop() {
         Serial.print("Delta: ");
         Serial.println(delta);
       }
- 
       
-      //Serial.println("...");
-
       break;
   }
 }
