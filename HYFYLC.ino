@@ -1,4 +1,4 @@
-mi me#include "MyTimer.h"
+#include "MyTimer.h"
 
 // Pin defines
 #define btn1Pin 2 // button 1
