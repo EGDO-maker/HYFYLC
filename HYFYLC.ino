@@ -19,7 +19,7 @@
 #define loadTime 4000
 #define unclogTime 1500
 #define loadAttempts 5  // Max loading attempts with no food transit detection
-#define springChargeTime 1000 
+#define springChargeTime 2000 // for 30 RPM motor 1 turn takess 3 sec.
 #define lightBaseline 140
 #define lightThreshold 80
 #define baselineTolerance 20
@@ -227,6 +227,7 @@ void loop() {
     case 3:
       if (first){
         // run code only once
+        first = false;
         Serial.println(state);
         MotorCmd(0, 0, 1, springChargeTime);
       }
