@@ -23,6 +23,7 @@
 #define lightBaseline 140
 #define lightThreshold 80
 #define baselineTolerance 20
+#define maxThrows 100
 
 
 /*
@@ -53,6 +54,7 @@ byte loadCount = 0;
 byte unclogCount = 0;
 int lightReference = lightBaseline;
 int delta = 0, prevDelta = 0;
+int throwsCount = 0;
 
 int ledTime[] = {3000, 3000};
 int ledIndex = 0;
@@ -231,8 +233,12 @@ void loop() {
         Serial.println(state);
         MotorCmd(0, 0, 1, springChargeTime);
       }
+      if (throwsCount >= maxThrows){
+        throwsCount = 0;
+        go(0);
+      }
+
       btn1 = digitalRead(btn1Pin);
-      //btn2 = digitalRead(btn2Pin);
       if ((!btn1Tmr.check()) && (prevBtn1 && !btn1) ){
         btn1Tmr.set(debounceTime);
         btn1Tmr.start();
